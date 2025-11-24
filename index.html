@@ -24,18 +24,18 @@
   
   <div class="flex items-center gap-4">
     <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
-    <button id="registerBtn" class="text-red-600 hover:text-red-700 transition">Регистрация</button>
-    <button id="profileBtn" class="text-red-600 hover:text-red-700 transition">Профиль</button>
+    <button id="registerBtn" class="px-3 py-1 rounded font-semibold bg-red-600 text-white hover:bg-red-700 transition" >Регистрация</button>
+    <button id="profileBtn" class="px-3 py-1 rounded font-semibold bg-red-600 text-white hover:bg-red-700 transition">Профиль</button>
   </div>
 </header>
 
 <!-- Главный экран -->
 <section id="mainScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
   <img id="bg-image"
-       src="images\самурай.png"
-       alt="robot background"
-       class="absolute inset-0 w-full h-full object-contain opacity-[0.45] pointer-events-none">
-  <div id="glow" class="absolute w-[900px] h-[900px] rounded-full blur-[200px]"></div>
+       src="images/самурай.png"
+       alt="фон самурая"
+       class="absolute inset-0 w-full h-full object-contain pointer-events-none">
+  <div id="glow" class="absolute w-[900px] h-[900px] rounded-full"></div>
 
   <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6" id="heroContent">
     <h1 id="hero-title" class="text-5xl md:text-6xl font-extrabold mb-6 text-red-600">AURATECH54 <span id="hero-span" class="text-red-600">STORE</span></h1>
@@ -54,9 +54,9 @@
 <!-- Экран регистрации -->
 <section id="registerScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 hidden">
   <img id="bg-image-register"
-       src="images\самурай.png"
-       alt="robot background"
-       class="absolute inset-0 w-full h-full object-contain opacity-[0.45] pointer-events-none">
+       src="images/самурай.png"
+       alt="фон самурая"
+       class="absolute inset-0 w-full h-full object-contain pointer-events-none">
   <div class="relative z-10 max-w-sm w-full px-6">
     <div id="registerBox" class="bg-neutral-900 bg-opacity-90 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl text-red-600 font-bold mb-4 text-center" id="registerTitle">Регистрация</h2>
@@ -80,6 +80,8 @@ const navText = document.querySelectorAll(".nav-text");
 const btnPrimary = document.getElementById("btn-primary");
 const btnOutline = document.getElementById("btn-outline");
 const glow = document.getElementById("glow");
+const registerBtnEl = document.getElementById("registerBtn");
+const profileBtnEl = document.getElementById("profileBtn");
 
 // Элементы регистрации
 const registerBox = document.getElementById("registerBox");
@@ -95,21 +97,16 @@ let theme = localStorage.getItem("theme") || "red";
 applyTheme(theme);
 
 themeBtn.addEventListener("click", () => {
-  theme = theme === "red" ? "gray" : "red";
+  theme = theme === "red" ? "purple" : "red";
   localStorage.setItem("theme", theme);
   applyTheme(theme);
 });
 
 function applyTheme(theme){
   if(theme==="red"){
-    document.body.classList.remove("bg-purple-100"); // убираем светло-фиолетовый
-    document.body.classList.add("bg-neutral-900"); // тёмный фон
-    // остальной код по окраске текста и кнопок
-  } else {
-    document.body.classList.remove("bg-neutral-900"); // убираем тёмный фон
-    document.body.classList.add("bg-purple-100"); // светло-фиолетовый фон
-  }
-  if(theme==="red"){
+    document.body.classList.remove("bg-purple-800");
+    document.body.classList.add("bg-neutral-900");
+
     themeBtn.textContent="🌙";
     glow.style.backgroundColor="rgba(230,0,0,0.2)";
     [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
@@ -118,13 +115,23 @@ function applyTheme(theme){
     btnOutline.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("border-gray-400","border-red-600");
     btnOutline.classList.replace("text-gray-400","text-red-600");
+
     registerBox.classList.replace("bg-gray-700","bg-neutral-900");
     registerFormInputs.forEach(input=>{
       input.classList.replace("bg-gray-600","bg-neutral-800");
       input.classList.replace("text-gray-400","text-red-600");
       input.classList.replace("border-gray-400","border-red-600");
     });
-  }else{
+
+    // кнопки регистрации и профиля
+    registerBtnEl.classList.replace("bg-purple-800","bg-red-600");
+    profileBtnEl.classList.replace("bg-purple-800","bg-red-600");
+    registerBtnEl.classList.replace("text-gray-200","text-white");
+    profileBtnEl.classList.replace("text-gray-200","text-white");
+  } else {
+    document.body.classList.remove("bg-neutral-900");
+    document.body.classList.add("bg-purple-800");
+
     themeBtn.textContent="☀️";
     glow.style.backgroundColor="rgba(200,200,200,0.2)";
     [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
@@ -133,12 +140,19 @@ function applyTheme(theme){
     btnOutline.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("border-red-600","border-gray-400");
     btnOutline.classList.replace("text-red-600","text-gray-400");
+
     registerBox.classList.replace("bg-neutral-900","bg-gray-700");
     registerFormInputs.forEach(input=>{
       input.classList.replace("bg-neutral-800","bg-gray-600");
       input.classList.replace("text-red-600","text-gray-400");
       input.classList.replace("border-red-600","border-gray-400");
     });
+
+    // кнопки регистрации и профиля
+    registerBtnEl.classList.replace("bg-red-600","bg-purple-800");
+    profileBtnEl.classList.replace("bg-red-600","bg-purple-800");
+    registerBtnEl.classList.replace("text-white","text-gray-200");
+    profileBtnEl.classList.replace("text-white","text-gray-200");
   }
 }
 
