@@ -23,13 +23,8 @@
   </nav>
   
   <div class="flex items-center gap-4">
-    <!-- Кнопка темы -->
     <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
-    
-    <!-- Регистрация -->
     <button id="registerBtn" class="text-red-600 hover:text-red-700 transition">Регистрация</button>
-    
-    <!-- Профиль -->
     <button id="profileBtn" class="text-red-600 hover:text-red-700 transition">Профиль</button>
   </div>
 </header>
@@ -63,13 +58,13 @@
        alt="robot background"
        class="absolute inset-0 w-full h-full object-contain opacity-[0.45] pointer-events-none">
   <div class="relative z-10 max-w-sm w-full px-6">
-    <div class="bg-neutral-900 bg-opacity-90 p-6 rounded-lg shadow-lg">
-      <h2 class="text-2xl text-red-600 font-bold mb-4 text-center">Регистрация</h2>
+    <div id="registerBox" class="bg-neutral-900 bg-opacity-90 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl text-red-600 font-bold mb-4 text-center" id="registerTitle">Регистрация</h2>
       <form id="registerForm" class="flex flex-col gap-3">
-        <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-        <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-        <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-        <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700">Зарегистрироваться</button>
+        <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800" id="registerName">
+        <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800" id="registerEmail">
+        <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800" id="registerPassword">
+        <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700" id="registerSubmit">Зарегистрироваться</button>
       </form>
       <button id="backToMain" class="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">Главная</button>
     </div>
@@ -86,8 +81,18 @@ const navText = document.querySelectorAll(".nav-text");
 const btnPrimary = document.getElementById("btn-primary");
 const btnOutline = document.getElementById("btn-outline");
 const glow = document.getElementById("glow");
-let theme = localStorage.getItem("theme") || "red";
 
+// Элементы регистрации
+const registerBox = document.getElementById("registerBox");
+const registerTitle = document.getElementById("registerTitle");
+const registerFormInputs = [
+  document.getElementById("registerName"),
+  document.getElementById("registerEmail"),
+  document.getElementById("registerPassword"),
+  document.getElementById("registerSubmit")
+];
+
+let theme = localStorage.getItem("theme") || "red";
 applyTheme(theme);
 
 themeBtn.addEventListener("click", () => {
@@ -100,21 +105,33 @@ function applyTheme(theme){
   if(theme==="red"){
     themeBtn.textContent="🌙";
     glow.style.backgroundColor="rgba(230,0,0,0.2)";
-    [headerTitle,heroTitle,heroSpan].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
+    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
     navText.forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
     btnPrimary.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("border-gray-400","border-red-600");
     btnOutline.classList.replace("text-gray-400","text-red-600");
+    registerBox.classList.replace("bg-gray-700","bg-neutral-900");
+    registerFormInputs.forEach(input=>{
+      input.classList.replace("bg-gray-600","bg-neutral-800");
+      input.classList.replace("text-gray-400","text-red-600");
+      input.classList.replace("border-gray-400","border-red-600");
+    });
   }else{
     themeBtn.textContent="☀️";
     glow.style.backgroundColor="rgba(200,200,200,0.2)";
-    [headerTitle,heroTitle,heroSpan].forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
+    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
     navText.forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
     btnPrimary.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("border-red-600","border-gray-400");
     btnOutline.classList.replace("text-red-600","text-gray-400");
+    registerBox.classList.replace("bg-neutral-900","bg-gray-700");
+    registerFormInputs.forEach(input=>{
+      input.classList.replace("bg-neutral-800","bg-gray-600");
+      input.classList.replace("text-red-600","text-gray-400");
+      input.classList.replace("border-red-600","border-gray-400");
+    });
   }
 }
 
