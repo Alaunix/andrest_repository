@@ -24,8 +24,8 @@
   
   <div class="flex items-center gap-4">
     <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
-    <button id="registerBtn" class="px-3 py-1 rounded font-semibold bg-red-600 text-white hover:bg-red-700 transition" >Регистрация</button>
-    <button id="profileBtn" class="px-3 py-1 rounded font-semibold bg-red-600 text-white hover:bg-red-700 transition">Профиль</button>
+    <button id="registerBtn" class="font-semibold text-red-600 hover:text-red-700 transition">Регистрация</button>
+    <button id="profileBtn" class="font-semibold text-red-600 hover:text-red-700 transition">Профиль</button>
   </div>
 </header>
 
@@ -35,7 +35,6 @@
        src="images/самурай.png"
        alt="фон самурая"
        class="absolute inset-0 w-full h-full object-contain pointer-events-none">
-  <div id="glow" class="absolute w-[900px] h-[900px] rounded-full"></div>
 
   <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6" id="heroContent">
     <h1 id="hero-title" class="text-5xl md:text-6xl font-extrabold mb-6 text-red-600">AURATECH54 <span id="hero-span" class="text-red-600">STORE</span></h1>
@@ -79,7 +78,6 @@ const heroSpan = document.getElementById("hero-span");
 const navText = document.querySelectorAll(".nav-text");
 const btnPrimary = document.getElementById("btn-primary");
 const btnOutline = document.getElementById("btn-outline");
-const glow = document.getElementById("glow");
 const registerBtnEl = document.getElementById("registerBtn");
 const profileBtnEl = document.getElementById("profileBtn");
 
@@ -108,7 +106,6 @@ function applyTheme(theme){
     document.body.classList.add("bg-neutral-900");
 
     themeBtn.textContent="🌙";
-    glow.style.backgroundColor="rgba(230,0,0,0.2)";
     [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
     navText.forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
     btnPrimary.classList.replace("bg-gray-400","bg-red-600");
@@ -123,17 +120,14 @@ function applyTheme(theme){
       input.classList.replace("border-gray-400","border-red-600");
     });
 
-    // кнопки регистрации и профиля
-    registerBtnEl.classList.replace("bg-purple-800","bg-red-600");
-    profileBtnEl.classList.replace("bg-purple-800","bg-red-600");
-    registerBtnEl.classList.replace("text-gray-200","text-white");
-    profileBtnEl.classList.replace("text-gray-200","text-white");
+    // кнопки регистрации и профиля - текст
+    registerBtnEl.classList.replace("text-gray-200","text-red-600");
+    profileBtnEl.classList.replace("text-gray-200","text-red-600");
   } else {
     document.body.classList.remove("bg-neutral-900");
     document.body.classList.add("bg-purple-800");
 
     themeBtn.textContent="☀️";
-    glow.style.backgroundColor="rgba(200,200,200,0.2)";
     [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
     navText.forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
     btnPrimary.classList.replace("bg-red-600","bg-gray-400");
@@ -148,11 +142,9 @@ function applyTheme(theme){
       input.classList.replace("border-red-600","border-gray-400");
     });
 
-    // кнопки регистрации и профиля
-    registerBtnEl.classList.replace("bg-red-600","bg-purple-800");
-    profileBtnEl.classList.replace("bg-red-600","bg-purple-800");
-    registerBtnEl.classList.replace("text-white","text-gray-200");
-    profileBtnEl.classList.replace("text-white","text-gray-200");
+    // кнопки регистрации и профиля - текст
+    registerBtnEl.classList.replace("text-red-600","text-purple-300");
+    profileBtnEl.classList.replace("text-red-600","text-purple-300");
   }
 }
 
@@ -166,7 +158,6 @@ document.addEventListener("mousemove", e => {
 
 // Показ/скрытие экранов
 const registerBtn = document.getElementById("registerBtn");
-const profileBtn = document.getElementById("profileBtn");
 const mainScreen = document.getElementById("mainScreen");
 const registerScreen = document.getElementById("registerScreen");
 const navHome = document.getElementById("navHome");
