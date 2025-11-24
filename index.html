@@ -4,194 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AURATECH54 STORE</title>
-<script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Шрифт, похожий на тот, что в макете -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://kit.fontawesome.com/6ab3256df8.js" crossorigin="anonymous"></script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Montserrat:wght@300;400;600&display=swap');
+
 * { font-family: "Montserrat", sans-serif; }
-.title-font { font-family: "Orbitron", sans-serif; letter-spacing: 4px; }
-
-#bg-image, 
-#bg-image-register {
-  transition: transform 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-  0% {opacity: 0; transform: translateY(20px);}
-  100% {opacity: 1; transform: translateY(0);}
-}
-.animate-fadeIn { animation: fadeIn 1.5s ease-out forwards; }
+.title-font { font-family: "Orbitron", sans-serif; letter-spacing: 3px; }
 </style>
 
 </head>
-<body class="relative overflow-hidden bg-gray-900"
-      style="background-image: url('images/Фон тёмный.jpg'); background-size: cover; background-position: center;">
+<body class="bg-neutral-900 text-white transition-all duration-300">
 
 <!-- HEADER -->
 <header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 
                bg-black/40 backdrop-blur-md border-b border-white/10">
-
-  <!-- Лого -->
   <div class="flex items-center gap-2">
-    <span class="text-red-600 text-xl"></span>
-    <span class="title-font font-extrabold text-white text-lg">AURATECH54 STORE</span>
+    <span class="title-font font-extrabold text-2xl text-white">AURATECH54 STORE</span>
   </div>
-
-  <!-- Навигация -->
-  <nav class="flex gap-6 text-sm">
-    <a href="#home" class="hover:text-red-600 text-red-600">Главная</a>
-    <a href="#catalog" class="hover:text-red-600 text-white">Каталог</a>
-    <a href="#contacts" class="hover:text-red-600 text-white">Контакты</a>
+  <nav class="flex gap-6 font-medium">
+    <a href="index.html" class="hover:text-red-600 transition">Главная</a>
+    <a href="register.html" class="hover:text-red-600 transition">Регистрация</a>
   </nav>
-
-  <!-- Иконки -->
-  <div class="flex items-center gap-4">
-
-    <!-- Theme toggle -->
-    <button id="themeToggle" class="text-xl hover:text-red-600 transition text-white">
-      🌙
-    </button>
-
-    <!-- Иконка профиля -->
-    <button id="profileIcon" class="hover:text-red-600 transition">
-      <!-- heroicon user -->
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-           stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-white">
-        <path stroke-linecap="round" stroke-linejoin="round" 
-              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-        <path stroke-linecap="round" stroke-linejoin="round" 
-              d="M4.5 20.25a7.5 7.5 0 1115 0v.75H4.5v-.75z" />
-      </svg>
+  <div class="flex gap-4 items-center">
+    <button id="themeToggle" class="text-xl hover:text-red-600">
+      <i class="fa-solid fa-moon"></i>
     </button>
   </div>
 </header>
 
-<!-- MAIN SCREEN -->
-<section id="mainScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
-
-  <img id="bg-image"
-       src="images/самурай.png"
-       class="absolute inset-0 w-full h-full object-contain pointer-events-none opacity-90">
-
-  <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6">
-    <h1 class="title-font text-6xl md:text-7xl font-extrabold mb-6 text-white">
-      AURATECH54 <span class="text-red-600">STORE</span>
-    </h1>
-
-    <p class="text-lg text-white/80 mb-10">
-      Мир технологий нового поколения.<br>
-      Инновации Apple для творчества и продуктивности.
-    </p>
-
-    <!-- Кнопки -->
-    <div class="flex justify-center gap-6 mb-12">
-
-      <!-- Строгая прозрачная кнопка -->
-      <a class="px-8 py-3 rounded-lg border border-red-600 text-red-600 
-                 font-semibold tracking-wider uppercase transition 
-                 hover:bg-red-600 hover:text-white">
-        Перейти к покупкам
-      </a>
-
-      <a class="px-8 py-3 rounded-lg border border-white/30 text-white/80 
-                 font-semibold tracking-wider uppercase transition 
-                 hover:bg-white/20 hover:text-white">
-        Смотреть коллекцию
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- REGISTER SCREEN -->
-<section id="registerScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 hidden">
-
-  <img id="bg-image-register"
-       src="images/самурай.png"
-       class="absolute inset-0 w-full h-full object-contain pointer-events-none opacity-90">
-
-  <div class="relative z-10 max-w-sm w-full px-6">
-    <div class="bg-black/70 backdrop-blur-md p-6 rounded-lg border border-red-600/40 shadow-xl">
-
-      <h2 class="title-font text-3xl text-red-600 font-extrabold mb-6 text-center">
-        Регистрация
-      </h2>
-
-      <form id="registerForm" class="flex flex-col gap-4">
-        <input type="text" placeholder="Имя"
-               class="px-4 py-2 rounded bg-black/50 border border-red-600 text-red-600">
-
-        <input type="email" placeholder="Email"
-               class="px-4 py-2 rounded bg-black/50 border border-red-600 text-red-600">
-
-        <input type="password" placeholder="Пароль"
-               class="px-4 py-2 rounded bg-black/50 border border-red-600 text-red-600">
-
-        <button type="submit"
-                class="bg-red-600 text-white py-2 rounded hover:bg-red-700">
-          Зарегистрироваться
-        </button>
-      </form>
-
-    </div>
-  </div>
-</section>
+<!-- MAIN -->
+<main class="flex flex-col items-center justify-center h-screen px-6 text-center">
+  <h1 class="title-font text-6xl font-bold mb-6">Добро пожаловать в AURATECH54 STORE</h1>
+  <p class="text-white/70 mb-6">Лучшие технологии и аксессуары прямо здесь</p>
+  <a href="register.html" class="px-6 py-3 rounded bg-red-600 hover:bg-red-700 transition font-semibold">Создать аккаунт</a>
+</main>
 
 <script>
-// ----- Тема -----
-const themeBtn = document.getElementById("themeToggle");
+/* ====== Тема ======= */
 let theme = localStorage.getItem("theme") || "dark";
 applyTheme(theme);
 
-themeBtn.addEventListener("click", () => {
+document.getElementById("themeToggle").addEventListener("click", () => {
   theme = theme === "dark" ? "light" : "dark";
   localStorage.setItem("theme", theme);
   applyTheme(theme);
 });
 
-function applyTheme(mode) {
+function applyTheme(t) {
   const body = document.body;
+  const links = document.querySelectorAll("nav a");
+  const icon = document.querySelector("#themeToggle i");
 
-  if (mode === "dark") {
-    body.style.backgroundImage = "url('images/Фон тёмный.jpg')";
-    themeBtn.textContent = "🌙";
+  if (t === "dark") {
+    body.classList.remove("bg-gray-200","text-red-600");
+    body.classList.add("bg-neutral-900","text-white");
+    icon.className = "fa-solid fa-moon";
+    links.forEach(a => a.classList.remove("text-red-600"));
   } else {
-    body.style.backgroundImage = "url('images/Фон светлый.jpg')";
-    themeBtn.textContent = "☀️";
+    body.classList.remove("bg-neutral-900","text-white");
+    body.classList.add("bg-gray-200","text-red-600");
+    icon.className = "fa-solid fa-sun";
+    links.forEach(a => a.classList.add("text-red-600"));
   }
 }
-
-// ----- Параллакс -----
-document.addEventListener("mousemove", e => {
-  const x = (e.clientX - window.innerWidth / 2) / 60;
-  const y = (e.clientY - window.innerHeight / 2) / 60;
-  document.getElementById("bg-image").style.transform =
-    `translate(${x}px, ${y}px) scale(1.05)`;
-});
-
-// ----- Переключение экранов -----
-const mainScreen = document.getElementById("mainScreen");
-const registerScreen = document.getElementById("registerScreen");
-const profileIcon = document.getElementById("profileIcon");
-
-profileIcon.addEventListener("click", () => {
-  mainScreen.classList.add("hidden");
-  registerScreen.classList.remove("hidden");
-});
-
-// кнопка "Главная" наверху
-document.querySelector('a[href="#home"]').addEventListener("click", () => {
-  registerScreen.classList.add("hidden");
-  mainScreen.classList.remove("hidden");
-});
-
-// ----- Форма -----
-document.getElementById("registerForm").addEventListener("submit", e => {
-  e.preventDefault();
-  alert("Регистрация завершена!");
-});
 </script>
 
 </body>
