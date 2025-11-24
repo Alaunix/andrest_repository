@@ -30,18 +30,19 @@
     <button id="registerBtn" class="text-red-600 hover:text-red-700 transition">Регистрация</button>
     
     <!-- Профиль -->
-    <div id="profileDisplay" class="text-red-600">Незарегистрированный пользователь</div>
+    <button id="profileBtn" class="text-red-600 hover:text-red-700 transition">Профиль</button>
   </div>
 </header>
 
-<section class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
+<!-- Главный экран -->
+<section id="mainScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
   <img id="bg-image"
        src="/mnt/data/0ffd1ebf-0dc6-40a3-bf21-8efb77e35ef3.png"
        alt="robot background"
        class="absolute inset-0 w-full h-full object-contain opacity-[0.45] blur-[2px] pointer-events-none">
   <div id="glow" class="absolute w-[900px] h-[900px] rounded-full blur-[200px]"></div>
 
-  <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6">
+  <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6" id="heroContent">
     <h1 id="hero-title" class="text-5xl md:text-6xl font-extrabold mb-6 text-red-600">AURATECH54 <span id="hero-span" class="text-red-600">STORE</span></h1>
     <p id="hero-text" class="text-lg text-gray-300 mb-10">
       Войдите в мир технологий нового поколения.<br>
@@ -55,22 +56,25 @@
   </div>
 </section>
 
-<!-- Модальное окно регистрации -->
-<div id="registerModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
-  <div class="bg-neutral-900 p-6 rounded-lg max-w-sm w-full relative">
-    <h2 class="text-2xl text-red-600 font-bold mb-4">Регистрация</h2>
-    <form id="registerForm" class="flex flex-col gap-3">
-      <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-      <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-      <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
-      <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700">Зарегистрироваться</button>
-    </form>
-    <!-- Кнопка закрытия модалки -->
-    <button id="closeRegister" class="absolute top-2 right-2 text-gray-400 hover:text-white">✖</button>
-    <!-- Кнопка возврата на главную -->
-    <button id="backToHome" class="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">Назад на главную</button>
+<!-- Экран регистрации -->
+<section id="registerScreen" class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 hidden">
+  <img id="bg-image-register"
+       src="/mnt/data/0ffd1ebf-0dc6-40a3-bf21-8efb77e35ef3.png"
+       alt="robot background"
+       class="absolute inset-0 w-full h-full object-contain opacity-[0.45] blur-[2px] pointer-events-none">
+  <div class="relative z-10 max-w-sm w-full px-6">
+    <div class="bg-neutral-900 bg-opacity-90 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl text-red-600 font-bold mb-4 text-center">Регистрация</h2>
+      <form id="registerForm" class="flex flex-col gap-3">
+        <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+        <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+        <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+        <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700">Зарегистрироваться</button>
+      </form>
+      <button id="backToMain" class="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">Главная</button>
+    </div>
   </div>
-</div>
+</section>
 
 <script>
 // Theme toggle
@@ -114,7 +118,7 @@ function applyTheme(theme){
   }
 }
 
-// Параллакс
+// Параллакс главного экрана
 const bg = document.getElementById("bg-image");
 document.addEventListener("mousemove", e => {
   const x=(e.clientX-window.innerWidth/2)/60;
@@ -122,23 +126,28 @@ document.addEventListener("mousemove", e => {
   bg.style.transform=`translate(${x}px,${y}px) scale(1.05)`;
 });
 
-// Модальное окно регистрации
+// Показ/скрытие экранов
 const registerBtn = document.getElementById("registerBtn");
-const registerModal = document.getElementById("registerModal");
-const closeRegister = document.getElementById("closeRegister");
-const backToHome = document.getElementById("backToHome");
+const profileBtn = document.getElementById("profileBtn");
+const mainScreen = document.getElementById("mainScreen");
+const registerScreen = document.getElementById("registerScreen");
+const backToMain = document.getElementById("backToMain");
+
+registerBtn.addEventListener("click", ()=>{
+  mainScreen.classList.add("hidden");
+  registerScreen.classList.remove("hidden");
+});
+
+backToMain.addEventListener("click", ()=>{
+  registerScreen.classList.add("hidden");
+  mainScreen.classList.remove("hidden");
+});
+
+// Форма регистрации
 const registerForm = document.getElementById("registerForm");
-const profileDisplay = document.getElementById("profileDisplay");
-
-registerBtn.addEventListener("click", ()=> registerModal.classList.remove("hidden"));
-closeRegister.addEventListener("click", ()=> registerModal.classList.add("hidden"));
-backToHome.addEventListener("click", ()=> registerModal.classList.add("hidden"));
-
 registerForm.addEventListener("submit", e=>{
   e.preventDefault();
   alert("Регистрация завершена!");
-  registerModal.classList.add("hidden");
-  // Профиль не меняется, всегда "Незарегистрированный пользователь"
 });
 </script>
 </body>
