@@ -15,19 +15,28 @@
 
 <header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-neutral-900/80 backdrop-blur-md">
   <div class="font-bold text-red-600" id="header-title"> AURATECH54 STORE</div>
+  
   <nav class="flex gap-4 text-sm">
     <a href="#home" class="hover:text-red-600 text-red-600 nav-text">Главная</a>
     <a href="#catalog" class="hover:text-red-600 text-red-600 nav-text">Каталог</a>
     <a href="#contacts" class="hover:text-red-600 text-red-600 nav-text">Контакты</a>
-    <a href="#register" class="hover:text-red-600 text-red-600 nav-text">Регистрация</a>
-    <a href="#profile" class="hover:text-red-600 text-red-600 nav-text">Профиль</a>
   </nav>
-  <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
+  
+  <div class="flex items-center gap-4">
+    <!-- Кнопка темы -->
+    <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
+    
+    <!-- Регистрация -->
+    <button id="registerBtn" class="text-red-600 hover:text-red-700 transition">Регистрация</button>
+    
+    <!-- Профиль -->
+    <div id="profileDisplay" class="text-red-600">Незарегистрированный пользователь</div>
+  </div>
 </header>
 
 <section class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
   <img id="bg-image"
-       src="images\самурай.png"
+       src="/mnt/data/0ffd1ebf-0dc6-40a3-bf21-8efb77e35ef3.png"
        alt="robot background"
        class="absolute inset-0 w-full h-full object-contain opacity-[0.45] blur-[2px] pointer-events-none">
   <div id="glow" class="absolute w-[900px] h-[900px] rounded-full blur-[200px]"></div>
@@ -46,25 +55,22 @@
   </div>
 </section>
 
-<!-- Регистрация -->
-<section id="register" class="py-20 px-6 max-w-md mx-auto">
-  <h2 class="text-3xl font-bold mb-6 text-red-600">Регистрация</h2>
-  <form id="registerForm" class="flex flex-col gap-4">
-    <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded accent">
-    <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded accent">
-    <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded accent">
-    <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700 accent">Зарегистрироваться</button>
-  </form>
-</section>
-
-<!-- Профиль -->
-<section id="profile" class="py-20 px-6 max-w-md mx-auto">
-  <h2 class="text-3xl font-bold mb-6 text-red-600">Профиль</h2>
-  <div id="profileInfo" class="flex flex-col gap-2">
-    <p><strong>Имя:</strong> <span id="profileName">Не зарегистрирован</span></p>
-    <p><strong>Email:</strong> <span id="profileEmail">Не зарегистрирован</span></p>
+<!-- Модальное окно регистрации -->
+<div id="registerModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+  <div class="bg-neutral-900 p-6 rounded-lg max-w-sm w-full relative">
+    <h2 class="text-2xl text-red-600 font-bold mb-4">Регистрация</h2>
+    <form id="registerForm" class="flex flex-col gap-3">
+      <input type="text" placeholder="Имя" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+      <input type="email" placeholder="Email" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+      <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800">
+      <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700">Зарегистрироваться</button>
+    </form>
+    <!-- Кнопка закрытия модалки -->
+    <button id="closeRegister" class="absolute top-2 right-2 text-gray-400 hover:text-white">✖</button>
+    <!-- Кнопка возврата на главную -->
+    <button id="backToHome" class="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">Назад на главную</button>
   </div>
-</section>
+</div>
 
 <script>
 // Theme toggle
@@ -75,7 +81,6 @@ const heroSpan = document.getElementById("hero-span");
 const navText = document.querySelectorAll(".nav-text");
 const btnPrimary = document.getElementById("btn-primary");
 const btnOutline = document.getElementById("btn-outline");
-const registerInputs = document.querySelectorAll("#registerForm input, #registerForm button");
 const glow = document.getElementById("glow");
 let theme = localStorage.getItem("theme") || "red";
 
@@ -97,11 +102,6 @@ function applyTheme(theme){
     btnOutline.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("border-gray-400","border-red-600");
     btnOutline.classList.replace("text-gray-400","text-red-600");
-    registerInputs.forEach(el=>{
-      el.classList.replace("bg-gray-400","bg-red-600");
-      el.classList.replace("border-gray-400","border-red-600");
-      el.classList.replace("text-gray-400","text-red-600");
-    });
   }else{
     themeBtn.textContent="☀️";
     glow.style.backgroundColor="rgba(200,200,200,0.2)";
@@ -111,11 +111,6 @@ function applyTheme(theme){
     btnOutline.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("border-red-600","border-gray-400");
     btnOutline.classList.replace("text-red-600","text-gray-400");
-    registerInputs.forEach(el=>{
-      el.classList.replace("bg-red-600","bg-gray-400");
-      el.classList.replace("border-red-600","border-gray-400");
-      el.classList.replace("text-red-600","text-gray-400");
-    });
   }
 }
 
@@ -127,21 +122,24 @@ document.addEventListener("mousemove", e => {
   bg.style.transform=`translate(${x}px,${y}px) scale(1.05)`;
 });
 
-// Простая регистрация (только локально, без сервера)
+// Модальное окно регистрации
+const registerBtn = document.getElementById("registerBtn");
+const registerModal = document.getElementById("registerModal");
+const closeRegister = document.getElementById("closeRegister");
+const backToHome = document.getElementById("backToHome");
 const registerForm = document.getElementById("registerForm");
-const profileName = document.getElementById("profileName");
-const profileEmail = document.getElementById("profileEmail");
+const profileDisplay = document.getElementById("profileDisplay");
+
+registerBtn.addEventListener("click", ()=> registerModal.classList.remove("hidden"));
+closeRegister.addEventListener("click", ()=> registerModal.classList.add("hidden"));
+backToHome.addEventListener("click", ()=> registerModal.classList.add("hidden"));
 
 registerForm.addEventListener("submit", e=>{
   e.preventDefault();
-  const name = registerForm.querySelector('input[type="text"]').value;
-  const email = registerForm.querySelector('input[type="email"]').value;
-  profileName.textContent = name || "Не заполнено";
-  profileEmail.textContent = email || "Не заполнено";
-  alert("Регистрация завершена! Профиль обновлён.");
-  registerForm.reset();
+  alert("Регистрация завершена!");
+  registerModal.classList.add("hidden");
+  // Профиль не меняется, всегда "Незарегистрированный пользователь"
 });
 </script>
 </body>
 </html>
-
