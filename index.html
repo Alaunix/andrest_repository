@@ -95,56 +95,74 @@ let theme = localStorage.getItem("theme") || "red";
 applyTheme(theme);
 
 themeBtn.addEventListener("click", () => {
-  theme = theme === "red" ? "purple" : "red";
+  theme = theme === "red" ? "light" : "red";
   localStorage.setItem("theme", theme);
   applyTheme(theme);
 });
 
 function applyTheme(theme){
   if(theme==="red"){
-    document.body.classList.remove("bg-purple-800");
+    document.body.classList.remove("bg-gray-200");
     document.body.classList.add("bg-neutral-900");
 
     themeBtn.textContent="🌙";
-    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
-    navText.forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
+
+    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>{
+      el.classList.remove("text-white");
+      el.classList.add("text-red-600");
+    });
+    navText.forEach(el=>{
+      el.classList.remove("text-white");
+      el.classList.add("text-red-600");
+    });
     btnPrimary.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("bg-gray-400","bg-red-600");
     btnOutline.classList.replace("border-gray-400","border-red-600");
     btnOutline.classList.replace("text-gray-400","text-red-600");
 
-    registerBox.classList.replace("bg-gray-700","bg-neutral-900");
+    registerBox.classList.replace("bg-gray-200","bg-neutral-900");
     registerFormInputs.forEach(input=>{
-      input.classList.replace("bg-gray-600","bg-neutral-800");
-      input.classList.replace("text-gray-400","text-red-600");
+      input.classList.replace("bg-gray-200","bg-neutral-800");
+      input.classList.replace("text-white","text-red-600");
       input.classList.replace("border-gray-400","border-red-600");
     });
 
-    // кнопки регистрации и профиля - текст
-    registerBtnEl.classList.replace("text-gray-200","text-red-600");
-    profileBtnEl.classList.replace("text-gray-200","text-red-600");
+    registerBtnEl.classList.remove("text-white");
+    registerBtnEl.classList.add("text-red-600");
+    profileBtnEl.classList.remove("text-white");
+    profileBtnEl.classList.add("text-red-600");
+
   } else {
     document.body.classList.remove("bg-neutral-900");
-    document.body.classList.add("bg-purple-800");
+    document.body.classList.add("bg-gray-200");
 
     themeBtn.textContent="☀️";
-    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
-    navText.forEach(el=>el.classList.replace("text-red-600","text-gray-400"));
+
+    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>{
+      el.classList.remove("text-red-600");
+      el.classList.add("text-white");
+    });
+    navText.forEach(el=>{
+      el.classList.remove("text-red-600");
+      el.classList.add("text-white");
+    });
+
     btnPrimary.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("bg-red-600","bg-gray-400");
     btnOutline.classList.replace("border-red-600","border-gray-400");
-    btnOutline.classList.replace("text-red-600","text-gray-400");
+    btnOutline.classList.replace("text-red-600","text-white");
 
-    registerBox.classList.replace("bg-neutral-900","bg-gray-700");
+    registerBox.classList.replace("bg-neutral-900","bg-gray-200");
     registerFormInputs.forEach(input=>{
-      input.classList.replace("bg-neutral-800","bg-gray-600");
-      input.classList.replace("text-red-600","text-gray-400");
+      input.classList.replace("bg-neutral-800","bg-gray-200");
+      input.classList.replace("text-red-600","text-white");
       input.classList.replace("border-red-600","border-gray-400");
     });
 
-    // кнопки регистрации и профиля - текст
-    registerBtnEl.classList.replace("text-red-600","text-purple-300");
-    profileBtnEl.classList.replace("text-red-600","text-purple-300");
+    registerBtnEl.classList.remove("text-red-600");
+    registerBtnEl.classList.add("text-white");
+    profileBtnEl.classList.remove("text-red-600");
+    profileBtnEl.classList.add("text-white");
   }
 }
 
