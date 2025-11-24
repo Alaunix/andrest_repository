@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURATECH54 STORE</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {} } };
+</script>
+<style>
+#bg-image { transition: transform 0.2s ease-out; }
+@keyframes fadeIn { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+.animate-fadeIn { animation: fadeIn 1.5s ease-out forwards; }
+</style>
+</head>
+<body class="bg-neutral-900 relative overflow-hidden">
+
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-neutral-900/80 backdrop-blur-md">
+  <div class="font-bold text-red-600" id="header-title"> AURATECH54 STORE</div>
+  <nav class="flex gap-4 text-sm">
+    <a href="#" class="hover:text-red-600 text-red-600 nav-text">Главная</a>
+    <a href="#catalog" class="hover:text-red-600 text-red-600 nav-text">Каталог</a>
+    <a href="#contacts" class="hover:text-red-600 text-red-600 nav-text">Контакты</a>
+  </nav>
+  <button id="themeToggle" class="text-xl hover:text-red-600 transition">🌙</button>
+</header>
+
+<section class="h-screen w-full flex items-center justify-center relative overflow-hidden pt-16">
+
+  <!-- Фоновая картинка робота -->
+  <img id="bg-image"
+       src="C:\Users\AngelDemon102\Desktop\Сайт\images\самурай.png"
+       alt="robot background"
+       class="absolute inset-0 w-full h-full object-contain opacity-[0.45]  pointer-events-none">
+
+  <!-- Свечение -->
+  <div id="glow" class="absolute w-[900px] h-[900px] rounded-full blur-[200px]"></div>
+
+  <div class="relative z-10 max-w-3xl text-center animate-fadeIn px-6">
+    <h1 id="hero-title" class="text-5xl md:text-6xl font-extrabold mb-6 text-red-600">
+      AURATECH54 <span id="hero-span" class="text-red-600">STORE</span>
+    </h1>
+    <p id="hero-text" class="text-lg text-gray-300 mb-10">
+      Войдите в мир технологий нового поколения.<br>
+      Откройте силу инноваций Apple для творчества и продуктивности.
+    </p>
+
+    <div class="flex justify-center gap-4 mb-12">
+      <a id="btn-primary" class="px-6 py-3 rounded-lg font-semibold transition shadow-lg bg-red-600 text-white hover:bg-red-700">Перейти к покупкам</a>
+      <a id="btn-outline" class="px-6 py-3 rounded-lg font-semibold border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition">Смотреть коллекцию</a>
+    </div>
+  </div>
+
+</section>
+
+<script>
+const themeBtn = document.getElementById("themeToggle");
+const bg = document.getElementById("bg-image");
+const glow = document.getElementById("glow");
+const headerTitle = document.getElementById("header-title");
+const heroTitle = document.getElementById("hero-title");
+const heroSpan = document.getElementById("hero-span");
+const heroText = document.getElementById("hero-text");
+const navText = document.querySelectorAll(".nav-text");
+const btnPrimary = document.getElementById("btn-primary");
+const btnOutline = document.getElementById("btn-outline");
+
+// Инициализация темы
+let theme = localStorage.getItem("theme") || "red";
+applyTheme(theme);
+
+themeBtn.addEventListener("click", () => {
+  theme = theme === "red" ? "gray" : "red";
+  localStorage.setItem("theme", theme);
+  applyTheme(theme);
+});
+
+function applyTheme(theme) {
+  if(theme === "red") {
+    themeBtn.textContent = "🌙";
+    glow.style.backgroundColor = "rgba(230,0,0,0.2)";
+    headerTitle.classList.replace("text-gray-400","text-red-600");
+    heroTitle.classList.replace("text-gray-400","text-red-600");
+    heroSpan.classList.replace("text-gray-400","text-red-600");
+    navText.forEach(el => { el.classList.replace("text-gray-400","text-red-600"); });
+    btnPrimary.classList.replace("bg-gray-400","bg-red-600");
+    btnOutline.classList.replace("bg-gray-400","bg-red-600");
+    btnOutline.classList.replace("border-gray-400","border-red-600");
+    btnOutline.classList.replace("text-gray-400","text-red-600");
+  } else {
+    themeBtn.textContent = "☀️";
+    glow.style.backgroundColor = "rgba(200,200,200,0.2)";
+    headerTitle.classList.replace("text-red-600","text-gray-400");
+    heroTitle.classList.replace("text-red-600","text-gray-400");
+    heroSpan.classList.replace("text-red-600","text-gray-400");
+    navText.forEach(el => { el.classList.replace("text-red-600","text-gray-400"); });
+    btnPrimary.classList.replace("bg-red-600","bg-gray-400");
+    btnOutline.classList.replace("bg-red-600","bg-gray-400");
+    btnOutline.classList.replace("border-red-600","border-gray-400");
+    btnOutline.classList.replace("text-red-600","text-gray-400");
+  }
+}
+
+// Параллакс фона
+document.addEventListener("mousemove", e => {
+  const x = (e.clientX - window.innerWidth/2)/60;
+  const y = (e.clientY - window.innerHeight/2)/60;
+  bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+});
+</script>
+</body>
+</html>
