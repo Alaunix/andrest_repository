@@ -17,7 +17,7 @@
   <div class="font-bold text-red-600" id="header-title"> AURATECH54 STORE</div>
   
   <nav class="flex gap-4 text-sm">
-    <a href="#home" class="hover:text-red-600 text-red-600 nav-text">Главная</a>
+    <a href="#home" class="hover:text-red-600 text-red-600 nav-text" id="navHome">Главная</a>
     <a href="#catalog" class="hover:text-red-600 text-red-600 nav-text">Каталог</a>
     <a href="#contacts" class="hover:text-red-600 text-red-600 nav-text">Контакты</a>
   </nav>
@@ -66,7 +66,6 @@
         <input type="password" placeholder="Пароль" class="px-4 py-2 border border-red-600 rounded text-red-600 bg-neutral-800" id="registerPassword">
         <button type="submit" class="bg-red-600 text-white py-2 rounded hover:bg-red-700" id="registerSubmit">Зарегистрироваться</button>
       </form>
-      <button id="backToMain" class="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">Главная</button>
     </div>
   </div>
 </section>
@@ -148,14 +147,15 @@ const registerBtn = document.getElementById("registerBtn");
 const profileBtn = document.getElementById("profileBtn");
 const mainScreen = document.getElementById("mainScreen");
 const registerScreen = document.getElementById("registerScreen");
-const backToMain = document.getElementById("backToMain");
+const navHome = document.getElementById("navHome");
 
 registerBtn.addEventListener("click", ()=>{
   mainScreen.classList.add("hidden");
   registerScreen.classList.remove("hidden");
 });
 
-backToMain.addEventListener("click", ()=>{
+// Используем верхнюю кнопку "Главная"
+navHome.addEventListener("click", ()=>{
   registerScreen.classList.add("hidden");
   mainScreen.classList.remove("hidden");
 });
