@@ -101,20 +101,18 @@ themeBtn.addEventListener("click", () => {
 });
 
 function applyTheme(theme){
+  function applyTheme(theme){
   if(theme==="red"){
-    themeBtn.textContent="🌙";
-    glow.style.backgroundColor="rgba(230,0,0,0.2)";
-    [headerTitle,heroTitle,heroSpan,registerTitle].forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
-    navText.forEach(el=>el.classList.replace("text-gray-400","text-red-600"));
-    btnPrimary.classList.replace("bg-gray-400","bg-red-600");
-    btnOutline.classList.replace("bg-gray-400","bg-red-600");
-    btnOutline.classList.replace("border-gray-400","border-red-600");
-    btnOutline.classList.replace("text-gray-400","text-red-600");
-    registerBox.classList.replace("bg-gray-700","bg-neutral-900");
-    registerFormInputs.forEach(input=>{
-      input.classList.replace("bg-gray-600","bg-neutral-800");
-      input.classList.replace("text-gray-400","text-red-600");
-      input.classList.replace("border-gray-400","border-red-600");
+    document.body.classList.remove("bg-purple-100"); // убираем светло-фиолетовый
+    document.body.classList.add("bg-neutral-900"); // тёмный фон
+    // остальной код по окраске текста и кнопок
+  } else {
+    document.body.classList.remove("bg-neutral-900"); // убираем тёмный фон
+    document.body.classList.add("bg-purple-100"); // светло-фиолетовый фон
+    // остальной код по окраске текста и кнопок
+  }
+}
+
     });
   }else{
     themeBtn.textContent="☀️";
